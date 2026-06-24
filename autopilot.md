@@ -1,4 +1,6 @@
-Execute the specified plan or task with minimal user interaction. Work autonomously until complete or blocked.
+Execute the specified plan or task — or, with no argument, the project backlog — with minimal user interaction. Work autonomously until complete or blocked.
+
+**Runs synchronously in the operator's interactive (UI) session.** `/autopilot` is a foreground loop inside THIS Claude Code session: it pulls the backlog and works it one item at a time, in priority order, checkpointing through `/save` between items. It is NOT a background, detached, headless, or cloud run, and it is NOT a separate orchestrator — while it runs it occupies the operator's session, which is exactly how the operator watches progress and can interrupt at any point. One `/autopilot` invocation = one synchronous worker in one session; do not assume parallelism, and do not expect it to keep running after the session is closed.
 
 **Requires the `/save` command.** `/autopilot` checkpoints and commits exclusively through `/save` (Step B); it does not commit or checkpoint on its own.
 
